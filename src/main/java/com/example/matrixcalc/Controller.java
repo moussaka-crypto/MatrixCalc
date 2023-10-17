@@ -1,4 +1,3 @@
-
 package com.example.matrixcalc;
 
 import javafx.fxml.FXML;
@@ -42,35 +41,24 @@ public class Controller {
         textMatrix2 = new TextField[3][3];
         result = new Text[3][3];
 
-        textMatrix[0][0] = x11;
-        textMatrix[0][1] = x12;
-        textMatrix[0][2] = x13;
-        textMatrix[1][0] = x21;
-        textMatrix[1][1] = x22;
-        textMatrix[1][2] = x23;
-        textMatrix[2][0] = x31;
-        textMatrix[2][1] = x32;
-        textMatrix[2][2] = x33;
+        populateArray(textMatrix, "x", TextField.class);
+        populateArray(textMatrix2, "y", TextField.class);
+        populateArray(result, "z", Text.class);
+    }
 
-        textMatrix2[0][0] = y11;
-        textMatrix2[0][1] = y12;
-        textMatrix2[0][2] = y13;
-        textMatrix2[1][0] = y21;
-        textMatrix2[1][1] = y22;
-        textMatrix2[1][2] = y23;
-        textMatrix2[2][0] = y31;
-        textMatrix2[2][1] = y32;
-        textMatrix2[2][2] = y33;
-
-        result[0][0] = z11;
-        result[0][1] = z12;
-        result[0][2] = z13;
-        result[1][0] = z21;
-        result[1][1] = z22;
-        result[1][2] = z23;
-        result[2][0] = z31;
-        result[2][1] = z32;
-        result[2][2] = z33;
+    // template methods evala
+    private <T> void populateArray(T[][] array, String prefix, Class<T> fieldType) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                String fieldName = prefix + (i + 1) + (j + 1);
+                try {
+                    array[i][j] = fieldType.cast(this.getClass().getDeclaredField(fieldName).get(this));
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     private boolean numberFormatChecker(String text) {
@@ -109,7 +97,8 @@ public class Controller {
     }
 
     @FXML
-    public void add() {
+    public void add()
+            throws NoSuchFieldException, IllegalAccessException {
         parseText();
         int[][] sum = new int[3][3];
         // looping through rows
@@ -120,19 +109,18 @@ public class Controller {
                 result[x][y].setText(Integer.toString(sum[x][y]));
             }
         }
-        z11 = result[0][0];
-        z12 = result[0][1];
-        z13 = result[0][2];
-        z21 = result[1][0];
-        z22 = result[1][1];
-        z23 = result[1][2];
-        z31 = result[2][0];
-        z32 = result[2][1];
-        z33 = result[2][2];
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                String fieldName = "z" + (i + 1) + (j + 1);
+                this.getClass().getDeclaredField(fieldName).set(this, result[i][j]);
+            }
+        }
     }
 
     @FXML
-    public void multiply() {
+    public void multiply()
+            throws NoSuchFieldException, IllegalAccessException{
         parseText();
         // creates a new 2D variable for the result of multiplying of two matrices
         int[][] output = new int[3][3];
@@ -150,14 +138,13 @@ public class Controller {
             }
         }
 
-        z11 = result[0][0];
-        z12 = result[0][1];
-        z13 = result[0][2];
-        z21 = result[1][0];
-        z22 = result[1][1];
-        z23 = result[1][2];
-        z31 = result[2][0];
-        z32 = result[2][1];
-        z33 = result[2][2];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                String fieldName = "z" + (i + 1) + (j + 1);
+                this.getClass().getDeclaredField(fieldName).set(this, result[i][j]);
+            }
+        }
     }
 }
+
+// Javata basi mastiqta
