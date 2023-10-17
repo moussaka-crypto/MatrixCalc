@@ -210,7 +210,7 @@
                             </padding>
                         </VBox>
                </children></HBox>
-            <Label layoutX="589.0" layoutY="26.0" prefHeight="20.0" prefWidth="81.0" text="Result" textFill="#2c02f5">
+            <Label layoutX="583.0" layoutY="26.0" prefHeight="20.0" prefWidth="88.0" text="Results" textFill="#2c02f5">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>

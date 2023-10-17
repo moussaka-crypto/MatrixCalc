@@ -1,94 +1,29 @@
+
 package com.example.matrixcalc;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Controller {
 
     @FXML
-    private TextField x11;
+    private TextField x11, x12, x13,
+                      x21, x22, x23,
+                      x31, x32, x33;
 
     @FXML
-    private TextField x21;
+    private TextField y11, y12, y13,
+                      y21, y22, y23,
+                      y31, y32, y33;
+
 
     @FXML
-    private TextField x31;
-
-    @FXML
-    private TextField x12;
-
-    @FXML
-    private TextField x22;
-
-    @FXML
-    private TextField x32;
-
-    @FXML
-    private TextField x13;
-
-    @FXML
-    private TextField x23;
-
-    @FXML
-    private TextField x33;
-
-    @FXML
-    private TextField y11;
-
-    @FXML
-    private TextField y12;
-
-    @FXML
-    private TextField y13;
-
-    @FXML
-    private TextField y21;
-
-    @FXML
-    private TextField y22;
-
-    @FXML
-    private TextField y23;
-
-    @FXML
-    private TextField y31;
-
-    @FXML
-    private TextField y32;
-
-    @FXML
-    private TextField y33;
-
-    @FXML
-    private Text z11;
-
-    @FXML
-    private Text z12;
-
-    @FXML
-    private Text z13;
-
-    @FXML
-    private Text z21;
-
-    @FXML
-    private Text z22;
-
-    @FXML
-    private Text z23;
-
-    @FXML
-    private Text z31;
-
-    @FXML
-    private Text z32;
-
-    @FXML
-    private Text z33;
+    private Text z11, z12, z13,
+                 z21, z22, z23,
+                 z31, z32, z33;
 
     @FXML
     private Text messageText;
@@ -138,11 +73,6 @@ public class Controller {
         result[2][2] = z33;
     }
 
-    /**
-     * Checks if the given string text is in a number form
-     *
-     * @param text to be checked
-     */
     private boolean numberFormatChecker(String text) {
         String regularExpression = "[-+]?[0-9]*\\.?[0-9]+$";
         Pattern pattern = Pattern.compile(regularExpression);
@@ -150,9 +80,6 @@ public class Controller {
         return matcher.matches();
     }
 
-    /**
-     * Parses the given text into integer
-     */
     private void parseText() {
         messageText.setText("");
         int a = 0;
@@ -181,10 +108,6 @@ public class Controller {
         }
     }
 
-
-    /**
-     * The method adds two matrices
-     */
     @FXML
     public void add() {
         parseText();
@@ -208,9 +131,6 @@ public class Controller {
         z33 = result[2][2];
     }
 
-    /**
-     * Multiplies one matrix with another
-     */
     @FXML
     public void multiply() {
         parseText();
@@ -229,6 +149,7 @@ public class Controller {
                 }
             }
         }
+
         z11 = result[0][0];
         z12 = result[0][1];
         z13 = result[0][2];
@@ -240,4 +161,3 @@ public class Controller {
         z33 = result[2][2];
     }
 }
-
